@@ -1,0 +1,23 @@
+## Customize the test machine
+machine:
+   services:
+      - docker
+
+   # Version of ruby to use
+   ruby:
+      version:
+         1.9.3-p0-falcon
+
+dependencies:
+   pre:
+      - sudo apt-get update; sudo apt-get install ansible
+
+test:
+   override:
+      - >
+        wget -qO- bit.ly/ansibletest | env
+        DOCKER_IMAGES="centos:5 centos:6 centos:7 fedora:20 fedora:21
+        fedora:22 fedora:23 fedora:24 ubuntu:12.04 ubuntu:15.10
+        ubuntu:16.04 debian:7 debian:8 debian:stretch"
+        ANSIBLE_VERSIONS="1.4.4 2.1.0.0"
+        sh

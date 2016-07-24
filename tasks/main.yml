@@ -1,0 +1,23 @@
+---
+- include: compat.yml
+
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: RHEL.yml
+  when: >
+    ansible_distribution == 'CentOS' or
+    ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: install tor with {{backcompat_pkg_mgr}}
+  action: "{{backcompat_pkg_mgr}} name=tor"
+  sudo: yes
+  when: backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt"
+
+# Use command since dnf was only added as a module in ansible 1.9.0
+- name: install tor with dnf
+  command: dnf install -y tor
+  args:
+    creates: /usr/bin/tor
+  sudo: yes
+  when: backcompat_pkg_mgr == "dnf"
