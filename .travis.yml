@@ -14,13 +14,13 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y ansible
 
+# Ansible 1.4.4 does not seem to play well with debian:stretch
 script:
   - >
     wget -O- bit.ly/ansibletest | env
-    DOCKER_IMAGES="centos:5 centos:6 centos:7 fedora:20 fedora:21
-    fedora:22 fedora:23 fedora:24 ubuntu:12.04 ubuntu:14.04
-    ubuntu:16.04 debian:7 debian:8 debian:stretch"
-    ANSIBLE_VERSIONS="1.4.4 2.1.0.0"
+    DOCKER_IMAGES="centos:5 centos:7 fedora:20 fedora:24 ubuntu:12.04
+    ubuntu:16.04 debian:7 debian:8"
+    ANSIBLE_VERSIONS="1.4.4 1.9.2 2.1.0.0"
     sh
 
 after_failure:
