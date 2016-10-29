@@ -10,7 +10,7 @@
   sudo: yes
 
 - name: download tor gpg key
-  command: gpg --keyserver keys.gnupg.net --recv {{tor_key_fingerprint}}
+  command: gpg --keyserver pool.sks-keyservers.net --recv {{tor_key_fingerprint}}
   register: tor_key_result
   changed_when: "'unchanged: 1' not in tor_key_result.stderr"
   sudo: yes
