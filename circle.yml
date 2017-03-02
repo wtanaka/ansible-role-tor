@@ -17,10 +17,9 @@ test:
    override:
       - >
         (wget -qO- bit.ly/ansibletest | env
-        DOCKER_IMAGES="centos:5 centos:6 centos:7 fedora:20 fedora:21
-        fedora:22 fedora:23 fedora:24 ubuntu:12.04 ubuntu:14.04
-        ubuntu:16.04 debian:7 debian:8"
-        ANSIBLE_VERSIONS="1.4.4 2.1.0.0"
+        DOCKER_IMAGES="centos:5 fedora:21 fedora:22 fedora:23
+        ubuntu:14.04"
+        ANSIBLE_VERSIONS="1.4.4 2.1.0.0 2.2.1.0"
         sh) && (wget -qO- bit.ly/ansibletest | env
         DOCKER_IMAGES="debian:stretch"
-        ANSIBLE_VERSIONS="1.5.4 2.1.0.0")
+        ANSIBLE_VERSIONS="1.5.4 2.1.0.0 2.2.1.0")
