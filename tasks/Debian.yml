@@ -13,6 +13,7 @@
   command: gpg --keyserver pool.sks-keyservers.net --recv {{tor_key_fingerprint}}
   register: tor_key_result
   changed_when: "'unchanged: 1' not in tor_key_result.stderr"
+  until: tor_key_result|success
   sudo: yes
 
 - name: write tor key to /root
