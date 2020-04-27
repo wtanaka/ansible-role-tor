@@ -1,3 +1,5 @@
 ---
 - include: compat_sudo.yml
+- include: CentOS_sudo.yml
+  when: ansible_distribution == 'CentOS'
 - include: install_package_names_sudo.yml
