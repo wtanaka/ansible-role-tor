@@ -2,30 +2,37 @@
 # Needed to install gnupg
 - name: apt-get update
   apt: update_cache=true cache_valid_time=3600
+  sudo: yes
 
 # gnupg gpg command is needed to download tor package key
 - name: install gnupg
   apt: name=gnupg
+  sudo: yes
 
 - name: download tor gpg key
   command: gpg --keyserver pool.sks-keyservers.net --recv {{tor_key_fingerprint}}
   register: tor_key_result
   changed_when: "'unchanged: 1' not in tor_key_result.stderr"
   until: tor_key_result|success
+  sudo: yes
 
 - name: write tor key to /root
   command: >
     gpg --output {{tor_key_local_file}} --export {{tor_key_fingerprint}}
   args:
     creates: "{{tor_key_local_file}}"
+  sudo: yes
 
 - name: add tor key to apt-key
   apt_key: file={{tor_key_local_file}}
+  sudo: yes
 
 - name: tor sources.list
   template: src=tor.list.j2 dest=/etc/apt/sources.list.d/tor.list
   register: sources_list_result
+  sudo: yes
 
 - name: apt-get update
   apt: update_cache=true cache_valid_time=0
   when: sources_list_result.changed
+  sudo: yes
