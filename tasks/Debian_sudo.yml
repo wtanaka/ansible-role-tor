@@ -10,7 +10,8 @@
   sudo: yes
 
 - name: add tor key to apt-key
-  apt_key: file={{tor_key_local_file}}
+  apt_key:
+    file: "{{tor_key_local_file}}"
   sudo: yes
 
 - name: tor sources.list

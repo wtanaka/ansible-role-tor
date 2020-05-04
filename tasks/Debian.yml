@@ -8,7 +8,8 @@
   apt: name=gnupg
 
 - name: add tor key to apt-key
-  apt_key: file={{tor_key_local_file}}
+  apt_key:
+    file: "{{tor_key_local_file}}"
 
 - name: tor sources.list
   template: src=tor.list.j2 dest=/etc/apt/sources.list.d/tor.list
