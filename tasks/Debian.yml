@@ -7,18 +7,6 @@
 - name: install gnupg
   apt: name=gnupg
 
-- name: download tor gpg key
-  command: gpg --keyserver pool.sks-keyservers.net --recv {{tor_key_fingerprint}}
-  register: tor_key_result
-  changed_when: "'unchanged: 1' not in tor_key_result.stderr"
-  until: tor_key_result|success
-
-- name: write tor key to /root
-  command: >
-    gpg --output {{tor_key_local_file}} --export {{tor_key_fingerprint}}
-  args:
-    creates: "{{tor_key_local_file}}"
-
 - name: add tor key to apt-key
   apt_key: file={{tor_key_local_file}}
 
