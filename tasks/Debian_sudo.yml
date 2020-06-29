@@ -11,7 +11,12 @@
 
 - name: add tor key to apt-key
   apt_key:
-    file: "{{tor_key_local_file}}"
+    file: "{{tor_key_local_dir}}/{{tor_key_fingerprint1}}.gpg"
+  sudo: yes
+
+- name: add tor key to apt-key
+  apt_key:
+    file: "{{tor_key_local_dir}}/{{tor_key_fingerprint2}}.gpg"
   sudo: yes
 
 - name: tor sources.list

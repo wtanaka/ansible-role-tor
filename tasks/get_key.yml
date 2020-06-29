@@ -1,8 +1,14 @@
 ---
 - name: write tor key to /root
   copy:
-    src: 0x4e2c6e8793298290.gpg
-    dest: "{{tor_key_local_file}}"
+    src: "{{tor_key_fingerprint1}}.gpg"
+    dest: "{{tor_key_local_dir}}/{{tor_key_fingerprint1}}.gpg"
+  when: ansible_os_family == 'Debian'
+
+- name: write tor key to /root
+  copy:
+    src: "{{tor_key_fingerprint2}}.gpg"
+    dest: "{{tor_key_local_dir}}/{{tor_key_fingerprint2}}.gpg"
   when: ansible_os_family == 'Debian'
 
 ## TODO: Only do this for Ubuntu versions that need it

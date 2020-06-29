@@ -9,7 +9,11 @@
 
 - name: add tor key to apt-key
   apt_key:
-    file: "{{tor_key_local_file}}"
+    file: "{{tor_key_local_dir}}/{{tor_key_fingerprint1}}.gpg"
+
+- name: add tor key to apt-key
+  apt_key:
+    file: "{{tor_key_local_dir}}/{{tor_key_fingerprint2}}.gpg"
 
 - name: tor sources.list
   template: src=tor.list.j2 dest=/etc/apt/sources.list.d/tor.list

@@ -1,3 +1,4 @@
 ---
-tor_key_local_file: /root/tor.gpg
-tor_key_fingerprint: "0x4E2C6E8793298290"
+tor_key_local_dir: /root
+tor_key_fingerprint1: "0x4e2c6e8793298290"
+tor_key_fingerprint2: "0xee8cbc9e886ddd89"
