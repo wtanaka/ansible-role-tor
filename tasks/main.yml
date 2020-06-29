@@ -1,14 +1,7 @@
 ---
-- include: compat.yml
+- name: set should_run fact
+  set_fact:
+    should_run: True
 
 - include: include_vars.yml
-
-- include: Debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include: RHEL.yml
-  when: >
-    ansible_distribution == 'CentOS' or
-    ansible_distribution == 'Red Hat Enterprise Linux'
-
-- include: install_package_names.yml
+- include: sudoorbecome.yml

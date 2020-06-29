@@ -1,0 +1,20 @@
+---
+- name: write tor key to /root
+  copy:
+    src: "{{tor_key_fingerprint1}}.gpg"
+    dest: "{{tor_key_local_dir}}/{{tor_key_fingerprint1}}.gpg"
+  sudo: yes
+  when: ansible_os_family == 'Debian'
+
+- name: write tor key to /root
+  copy:
+    src: "{{tor_key_fingerprint2}}.gpg"
+    dest: "{{tor_key_local_dir}}/{{tor_key_fingerprint2}}.gpg"
+  sudo: yes
+  when: ansible_os_family == 'Debian'
+
+## TODO: Only do this for Ubuntu versions that need it
+#- name: apt-get update
+#  apt: update_cache=true cache_valid_time=0
+#  when: ansible_os_family == 'Debian' and sources_list_result.changed
+#  sudo: yes

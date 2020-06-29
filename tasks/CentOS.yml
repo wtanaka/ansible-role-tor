@@ -1,0 +1,15 @@
+---
+- name: install epel-release with {{backcompat_pkg_mgr}}
+  action: "{{backcompat_pkg_mgr}} name=epel-release"
+  when: backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt"
+
+# Use command since dnf was only added as a module in ansible 1.9.0
+- name: install epel-release with dnf
+  command: dnf install -y epel-release
+  args:
+    creates: /etc/yum.repos.d/epel.repo
+  when: backcompat_pkg_mgr == "dnf"
+
+- name: tor.repo
+  template: src=tor.repo.j2 dest=/etc/yum.repos.d/tor.repo
+  register: tor_repo_result
